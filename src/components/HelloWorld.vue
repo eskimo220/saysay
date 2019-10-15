@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1 ref="test">{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
@@ -8,7 +8,7 @@
         >vue-cli documentation</a
       >.
     </p>
-    <h3>Installed CLI Plugins</h3>
+    <h3 ref="test2">Installed CLI Plugins</h3>
     <ul>
       <li>
         <a
@@ -87,16 +87,30 @@
 </template>
 
 <script>
+import saysay from "./saysay";
+
 export default {
   name: "HelloWorld",
   props: {
     msg: String
+  },
+  mounted() {
+    const text1 = new saysay(this.$refs.test, 100);
+    const text2 = new saysay(this.$refs.test2, 100);
+
+    text1.render();
+    text1.tick(0);
+    text2.tick(0);
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+h1 {
+  text-align: left;
+}
+
 h3 {
   margin: 40px 0 0;
 }
